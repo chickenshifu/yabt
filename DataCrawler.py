@@ -21,7 +21,9 @@ class DataCrawler:
 
         self.targets = self.getSymbolUrl()
 
-        
+        self.crawlWebsite()
+
+
 
     def getSymbolUrl(self, website=None):
 
@@ -35,7 +37,6 @@ class DataCrawler:
                 
                 baseUrl = 'https://query2.finance.yahoo.com/v8/finance/chart/{}?symbol={}&period1=0&period2=9999999999&interval=1d'.format(symbol, symbol)
 
-                # baseUrl = 'https://de.finance.yahoo.com/quote/{}/history?period1=01&period2=1609545600&interval=1d&filter=history&frequency=1d&includeAdjustedClose=true'.format(symbol)
                 targets.append((symbol, baseUrl))
         
             return targets
@@ -52,7 +53,7 @@ class DataCrawler:
         dir_path = os.path.dirname(os.path.realpath(__file__))
 
         def makeFilename(symbol, directory='data'):
-            filename = dir_path + '/' + directory + '/' + '{}'.format(symbol)
+            filename = dir_path + '/' + directory + '/' + '{}.csv'.format(symbol)
 
             return filename
 
@@ -73,7 +74,7 @@ class DataCrawler:
             results = list()
 
             try:
-
+                print("Crawl: {}".format(url))
                 targetsJsonResponse = requests.get(url[1]).text
                 timestampList = json.loads(targetsJsonResponse)['chart']['result'][0]['timestamp']
                 openList = json.loads(targetsJsonResponse)['chart']['result'][0]['indicators']['quote'][0]['open']
@@ -85,9 +86,8 @@ class DataCrawler:
                 
                 for i in reversed(timestampList):
                    
-                    date = datetime.utcfromtimestamp(i).strftime('%Y-%m-%d')
+                    date = datetime.fromtimestamp(i).strftime('%Y-%m-%d %H:%M:%S')
                     results.append((date, openList.pop(), highList.pop(), lowList.pop(), closeList.pop()))
-
 
                 exportToCsv(results)
 
@@ -95,6 +95,8 @@ class DataCrawler:
             except requests.exceptions.RequestException as e:  # This is the correct syntax
                 raise SystemExit(e)
 
+            except KeyError:
+                print("ERROR: {} not possible to crawl, as there are no prices available".format(url))
 
         
 
@@ -103,8 +105,7 @@ class DataCrawler:
 if __name__ == '__main__':
 
     symbols = list()
-    symbols = ('ADJ.DE', 'BMW.DE', 'DTE.DE', 'SIE.DE', 'PLUG')
+    symbols = ('ZO1.DE', 'EXL.DE',  'HBH.DE', 'ADJ.DE', 'BMW.DE', 'DTE.DE', 'SIE.DE', 'PLUG')
     
 
     dc = DataCrawler(symbols)
-    dc.crawlWebsite()
