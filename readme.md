@@ -2,9 +2,9 @@
 
 **This framework is developed for educational purposes only. If - for any reason - anyone likes to contribute or to fork this project, please feel absolutely free.**
 
-## 1. Strucutre
+## 1. Structure
 yabt is to be build on the following fundamental modules:
-* DataCrawler
+* DataCrawler (done as of 03.01.2021)
 * DataHandler
 * Tardis
 * Portfolio
@@ -21,7 +21,7 @@ It saves all data into .csv files, as this is one of the most efficient ways to 
 
 ***Ideas for future versions / features***
 
-At the moment it is planned to execute DataCrawler every time a new backtest is run. So new .csv files are generated each time. A future version should include the feature, that DataCrawler (or DataHandler) should search for the already existing data in dir data/ and only append .csv files for missing values (e.g. if you would expand your backtest period to the future).
+At the moment it is planned to execute DataCrawler every time a new backtest is run. So new .csv files are generated each time. A future version should include the feature, that DataCrawler (or DataHandler) should search for the already existing data in dir ./data and only append .csv files for missing values (e.g. if you would expand your backtest period to the future).
 
 
 
