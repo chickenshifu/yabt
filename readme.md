@@ -25,6 +25,6 @@ At the moment it is planned to execute DataCrawler every time a new backtest is 
 
 
 
-**DataHandler**
+![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+) **DataHandler** ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+)    
 
 The DataHandler module is the building block between Tardis and the DataCrawler. It is given a list of symbols and stores those symbolds into sqlite database.
