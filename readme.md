@@ -1,4 +1,4 @@
-# Welcome to **yabt** - yet another backtesting framework!
+# Welcome to **yabt** - yet another backtesting framework for Python keen quants ;) 
 
 **This framework is developed for educational purposes only. If - for any reason - anyone likes to contribute or to fork this project, please feel absolutely free.**
 
