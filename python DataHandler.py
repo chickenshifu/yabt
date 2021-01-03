@@ -19,34 +19,21 @@ class DataHandler:
         
         self.dataframes = list()
         all_files = os.listdir(self.dir_path + '/data/') 
-        allData = list() 
-
-        counter = len(all_files)
+        allData = dict() 
 
         for file in all_files:
             full_filename = str(self.dir_path) + '/data/' + str(file)
+            print(full_filename)
 
             with open(full_filename, newline='') as f:
                 reader = csv.reader(f)
                 data = list(reader)
-                allData.append(data) 
+                allData[file] = data
 
-        allSymbols = list()
-
-        for csvFile in allData:
-
-            symbolInCsv = dict()
-
-            for row in csvFile:
-                symbolInCsv[row[0]] = (row[1], row[2], row[3], row[4])
-
-            allSymbols.append(symbolInCsv)
-
-
-            #####hier geht es weiter, ich muss schauen, wie ich das mit den einträgen üer die verschiedenen symbole mit gleiche mdatum hinbekomme....Listen???
-            
+        for key, values in all.items():
+            print(key)
+        
 #            df_file = pd.read_csv(full_filename)
-
 #            
 #            df_file['t'] = pd.to_datetime(df_file['t'], format='%Y-%m-%d %H:%M:%S')
 #            df_file = df_file.set_index('t')
