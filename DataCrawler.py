@@ -2,7 +2,7 @@
 
 
 #DataCrawler Class is passed a list of tuples which it then will parse the heck out of it from yahoo.finance.
-
+from datetime import datetime
 import json
 import csv
 import requests
@@ -83,8 +83,10 @@ class DataCrawler:
 
                 time.sleep(3 + random.randint(0,2))
                 
-                for i in timestampList:
-                    results.append((i, openList.pop(), highList.pop(), lowList.pop(), closeList.pop()))
+                for i in reversed(timestampList):
+                   
+                    date = datetime.utcfromtimestamp(i).strftime('%Y-%m-%d')
+                    results.append((date, openList.pop(), highList.pop(), lowList.pop(), closeList.pop()))
 
 
                 exportToCsv(results)
