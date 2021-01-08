@@ -20,8 +20,7 @@ class DataHandler:
         self.dataframes = list()
         all_files = os.listdir(self.dir_path + '/data/') 
         allData = list() 
-
-        counter = len(all_files)
+        llist = {} 
 
         for file in all_files:
             full_filename = str(self.dir_path) + '/data/' + str(file)
@@ -31,18 +30,20 @@ class DataHandler:
                 data = list(reader)
                 allData.append(data) 
 
-        allSymbols = list()
+        #calculate length of each csv file and append to list
 
-        for csvFile in allData:
+            for csvFile in allData:
 
-            symbolInCsv = dict()
+                symbolInCsv = dict()
 
-            for row in csvFile:
-                symbolInCsv[row[0]] = (row[1], row[2], row[3], row[4])
+                for row in csvFile:
+                    symbolInCsv[row[0]] = (row[1], row[2], row[3], row[4])
 
-            allSymbols.append(symbolInCsv)
+            
+            l = len(symbolInCsv)
+            llist[file] = l
 
-
+        print(llist)
             #####hier geht es weiter, ich muss schauen, wie ich das mit den einträgen üer die verschiedenen symbole mit gleiche mdatum hinbekomme....Listen???
             
 #            df_file = pd.read_csv(full_filename)

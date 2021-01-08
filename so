@@ -1,0 +1,56 @@
+How to loop through csv files and add entries with same date into dict?
+
+Consider a couple of plain vanilla csv files, containing time series sorted by date.
+```
+date,a,b,c,d,
+2020-12-30,foo,bar,data,example
+2020-12-30,again,data,foooo,baaar
+....
+```
+
+The goal is to loop through those csv files and resample the data in the manner that the merged data set is a list, containing tuples for each date and each csv file. Example:
+
+```
+mergedData = [((2020-01-07(csv_file_1(data)),(csv_file_2(data)),csv_file_3(date))),(2020-01-06(csv_file1(data)),(csv_file_2(data)),(csv_file_3(data))), ...]
+```
+
+
+What i've done so far:
+```
+def mergeData(self):
+    
+    all_files = os.listdir(self.dir_path + '/data/') 
+    allData = list() 
+
+    #get all csv files in dir '/data'
+    for file in all_files:
+            full_filename = str(self.dir_path) + '/data/' + str(file)
+
+            with open(full_filename, newline='') as f:
+                reader = csv.reader(f)
+                data = list(reader)
+                allData.append(data) 
+
+            allSymbols = list()
+
+    #import each csv file and put into huge combined list
+    for csvFile in allData:
+
+            symbolInCsv = dict()
+
+            for row in csvFile:
+                symbolInCsv[row[0]] = (row[1], row[2], row[3], row[4])
+
+            allSymbols.append(symbolInCsv)
+```
+
+Above code yields:
+```
+data = [{csv_file_1: '2012-06-20 09:00:00': ('55.400001525878906', '56.029998779296875', '54.79999923706055', '55.0'), '2012-06-19 09:00:00': ('54.400001525878906', '55.5', '54.400001525878906', '55.5'), '2012-06-18 09:00:00': ('54.0099983215332', '54.20000076293945', '54.0099983215332', '54.20000076293945'), csv_file_2: '2012-06-20 09:00:00': ('55.400001525878906', '56.029998779296875', '54.79999923706055', '55.0'), '2012-06-19 09:00:00': ('54.400001525878906', '55.5', '54.400001525878906', '55.5'), '2012-06-18 09:00:00': ('54.0099983215332', '54.20000076293945', '54.0099983215332', '54.20000076293945')}, ...]
+```
+
+
+Do you have any ideas how to accomplish above mentioned format as shown in example `mergedData`?
+
+Thanks in advance!
+
