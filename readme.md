@@ -17,7 +17,7 @@ yabt is to be build on the following fundamental modules:
 ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+) **DataCrawler**  ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+)       
 
 The DataCrawler module is one of the most intuitive modules. It will parse whatever data or website you want to be parsed. At this time it is meant to download data from yahoo.finance.
-It saves all data into .csv files, as this is one of the most efficient ways to store financial data.
+It saves all data into .csv files, as this is both the the most simplest and efficient ways to store financial data.
 
 ***Ideas for future versions / features***
 
